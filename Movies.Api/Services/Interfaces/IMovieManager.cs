@@ -12,7 +12,7 @@ namespace Movies.Api.Services.Interfaces
     {
         void AddMovieInfo(AddMovieInfo movieInfoModel);
 
-        void AddMovieContent(AddMovieContent content);
+        void AddMovieContent(AddMovieSource content);
 
         MovieListModel GetMovies(int page = 1, int pageSize = 20);
     }

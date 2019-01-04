@@ -6,11 +6,11 @@ using System.Web.Http;
 namespace Movies.Api.Controllers
 {
     [RoutePrefix("api")]
-    public class ValuesController : ApiController
+    public class MoviesController : ApiController
     {
         private readonly IMovieManager _movieManager;
 
-        public ValuesController(IMovieManager movieManager)
+        public MoviesController(IMovieManager movieManager)
         {
             _movieManager = movieManager ?? throw new ArgumentNullException(nameof(movieManager));
         }
@@ -26,7 +26,7 @@ namespace Movies.Api.Controllers
 
         [HttpPost]
         [Route("movies/newurl")]
-        public object AddMovieContent(AddMovieContent content)
+        public object AddMovieContent(AddMovieSource content)
         {
             _movieManager.AddMovieContent(content);
 

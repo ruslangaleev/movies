@@ -29,9 +29,9 @@ namespace Movies.Api.Services.Logic
                 UrlPoster = movieInfoModel.UrlPoster,
                 CreateAt = DateTime.Now,
                 UpdateAt = DateTime.Now,
-                MovieContents = new List<MovieContent>
+                MovieContents = new List<MovieSource>
                 {
-                    new MovieContent
+                    new MovieSource
                     {
                         // TODO: Сделать инициализацию со стороны базы данных
                         Id = Guid.NewGuid(),
@@ -47,7 +47,7 @@ namespace Movies.Api.Services.Logic
             _movieRepository.Save();
         }
 
-        public void AddMovieContent(AddMovieContent content)
+        public void AddMovieContent(AddMovieSource content)
         {
             var movieInfo = _movieRepository.Get(content.Id) ?? throw new ArgumentNullException(nameof(content.Id));
 
@@ -57,7 +57,7 @@ namespace Movies.Api.Services.Logic
             }
 
             var movieContents = movieInfo.MovieContents.ToList();
-            movieContents.Add(new MovieContent
+            movieContents.Add(new MovieSource
             {
                 Id = Guid.NewGuid(),
                 Quality = content.Quality,

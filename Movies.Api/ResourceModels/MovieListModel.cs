@@ -9,6 +9,7 @@ namespace Movies.Api.ResourceModels
     public class MovieListModel
     {
         public IEnumerable<AddMovieInfo> Movies { get; set; }
+
         public PageViewModel PageViewModel { get; set; }
     }
 }

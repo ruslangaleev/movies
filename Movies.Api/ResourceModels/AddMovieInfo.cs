@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Movies.Api.ResourceModels
 {
-    public class AddMovieInfo : AddMovieContent
+    public class AddMovieInfo
     {
         /// <summary>
         /// Заголовок фильма.
@@ -17,5 +17,15 @@ namespace Movies.Api.ResourceModels
         /// Ссылка на постер к фильму.
         /// </summary>
         public string UrlPoster { get; set; }
+
+        /// <summary>
+        /// Качество.
+        /// </summary>
+        public MovieQuality Quality { get; set; }
+
+        /// <summary>
+        /// Ссылка на фильм.
+        /// </summary>
+        public string Url { get; set; }
     }
 }

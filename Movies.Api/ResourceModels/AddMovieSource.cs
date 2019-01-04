@@ -1,24 +1,26 @@
-﻿using System;
+﻿using Movies.Api.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Movies.Api.Models
+namespace Movies.Api.ResourceModels
 {
-    public class MovieContent
+    public class AddMovieSource
     {
+        /// <summary>
+        /// Идентификатор фильма.
+        /// </summary>
         public Guid Id { get; set; }
 
         /// <summary>
-        /// Ксчество.
+        /// Качество.
         /// </summary>
         public MovieQuality Quality { get; set; }
 
         /// <summary>
-        /// Коллекция ссылок на фильм (Если вдруг одна из них перестала работать).
+        /// Новая ссылка на фильм.
         /// </summary>
         public string Url { get; set; }
-
-        public DateTime CreateAt { get; set; }
     }
 }

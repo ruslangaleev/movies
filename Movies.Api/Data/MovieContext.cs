@@ -11,7 +11,7 @@ namespace Movies.Api.Data
     {
         public DbSet<MovieInfo> MovieInfos { get; set; }
 
-        public DbSet<MovieContent> MovieContents { get; set; }
+        public DbSet<MovieSource> MovieContents { get; set; }
 
         public MovieContext() : base("name=MovieContext") { }
 

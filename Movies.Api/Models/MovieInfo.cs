@@ -16,7 +16,7 @@ namespace Movies.Api.Models
         /// <summary>
         /// Список источников.
         /// </summary>
-        public virtual ICollection<MovieContent> MovieContents { get; set; }
+        public virtual ICollection<MovieSource> MovieContents { get; set; }
 
         /// <summary>
         /// Ссылка на постер к фильму.
@@ -29,7 +29,7 @@ namespace Movies.Api.Models
 
         public MovieInfo()
         {
-            MovieContents = new List<MovieContent>();
+            MovieContents = new List<MovieSource>();
         }
     }
 }
