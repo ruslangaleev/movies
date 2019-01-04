@@ -2,6 +2,7 @@
 using Movies.Api.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
@@ -9,11 +10,15 @@ namespace Movies.Api.Data.Repositories.Logic
 {
     public class MovieRepository : IMovieRepository
     {
-        private readonly List<MovieInfo> _movies;
+        private DbContext _dbContext;
 
-        public MovieRepository()
+        private readonly DbSet<MovieInfo> _movies;
+
+        public MovieRepository(DbContext dbContext)
         {
-            _movies = new List<MovieInfo>();
+            _movies = dbContext.Set<MovieInfo>();
+
+            _dbContext = dbContext;
         }
 
         public void Add(MovieInfo movieInfo)
@@ -23,7 +28,7 @@ namespace Movies.Api.Data.Repositories.Logic
 
         public MovieInfo Get(Guid id)
         {
-            return _movies.Find(t => t.Id == id);
+            return _movies.Find(id);
         }
 
         public IQueryable<MovieInfo> GetAll()
@@ -33,7 +38,7 @@ namespace Movies.Api.Data.Repositories.Logic
 
         public void Save()
         {
-
+            _dbContext.SaveChanges();
         }
 
         public void Update(MovieInfo movieInfo)

@@ -16,11 +16,16 @@ namespace Movies.Api.Models
         /// <summary>
         /// Список источников.
         /// </summary>
-        public IEnumerable<MovieContent> MovieContents { get; set; }
+        public virtual ICollection<MovieContent> MovieContents { get; set; }
 
         /// <summary>
         /// Ссылка на постер к фильму.
         /// </summary>
         public string UrlPoster { get; set; }
+
+        public MovieInfo()
+        {
+            MovieContents = new List<MovieContent>();
+        }
     }
 }

@@ -64,7 +64,8 @@ namespace Movies.Api.Services.Logic
         public MovieListModel GetMovies(int page = 1, int pageSize = 20)
         {
             var count = _movieRepository.GetAll().Count();
-            var items = _movieRepository.GetAll().Skip((page - 1) * pageSize).Take(pageSize).ToList();
+            var items = _movieRepository.GetAll().OrderBy(t => t.Id)
+                .Skip((page - 1) * pageSize).Take(pageSize).ToList();
 
             PageViewModel pageViewModel = new PageViewModel(count, page, pageSize);
             MovieListModel viewModel = new MovieListModel

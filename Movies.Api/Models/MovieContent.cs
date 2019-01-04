@@ -7,6 +7,8 @@ namespace Movies.Api.Models
 {
     public class MovieContent
     {
+        public Guid Id { get; set; }
+
         /// <summary>
         /// Ксчество.
         /// </summary>
