@@ -35,9 +35,9 @@ namespace Movies.Api.Controllers
 
         [HttpGet]
         [Route("movies")]
-        public object GetMovies()
+        public object GetMovies(int page, int pageSize)
         {
-            return _movieManager.GetMovies();
+            return _movieManager.GetMovies(page, pageSize);
         }
     }
 }

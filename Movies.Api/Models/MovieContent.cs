@@ -18,5 +18,7 @@ namespace Movies.Api.Models
         /// Коллекция ссылок на фильм (Если вдруг одна из них перестала работать).
         /// </summary>
         public string Url { get; set; }
+
+        public DateTime CreateAt { get; set; }
     }
 }

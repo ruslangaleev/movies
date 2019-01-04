@@ -23,6 +23,10 @@ namespace Movies.Api.Models
         /// </summary>
         public string UrlPoster { get; set; }
 
+        public DateTime CreateAt { get; set; }
+
+        public DateTime UpdateAt { get; set; }
+
         public MovieInfo()
         {
             MovieContents = new List<MovieContent>();

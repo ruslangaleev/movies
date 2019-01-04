@@ -221,6 +221,10 @@
     <Compile Include="Migrations\201901041205146_MigrateDB.Designer.cs">
       <DependentUpon>201901041205146_MigrateDB.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201901041242392_MigrateDB1.cs" />
+    <Compile Include="Migrations\201901041242392_MigrateDB1.Designer.cs">
+      <DependentUpon>201901041242392_MigrateDB1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\UnityResolver.cs" />
     <Compile Include="Global.asax.cs">
@@ -298,6 +302,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201901041205146_MigrateDB.resx">
       <DependentUpon>201901041205146_MigrateDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901041242392_MigrateDB1.resx">
+      <DependentUpon>201901041242392_MigrateDB1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

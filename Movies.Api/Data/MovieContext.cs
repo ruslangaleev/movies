@@ -13,13 +13,12 @@ namespace Movies.Api.Data
 
         public DbSet<MovieContent> MovieContents { get; set; }
 
+        public MovieContext() : base("name=MovieContext") { }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<MovieInfo>().HasMany(c => c.MovieContents)
-            //    //.WithMany(s => s.)
-            //    .Map(t => t.MapLeftKey("CourseId")
-            //    .MapRightKey("StudentId")
-            //    .ToTable("CourseStudent"));
+            //Database.SetInitializer<MovieContext>(null);
+            //base.OnModelCreating(modelBuilder);
         }
     }
 }

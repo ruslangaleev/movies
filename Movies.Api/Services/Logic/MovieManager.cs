@@ -23,14 +23,21 @@ namespace Movies.Api.Services.Logic
 
             var movieInfo = new MovieInfo
             {
+                // TODO: Сделать инициализацию со стороны базы данных
+                Id = Guid.NewGuid(),
                 Title = movieInfoModel.Title,
                 UrlPoster = movieInfoModel.UrlPoster,
+                CreateAt = DateTime.Now,
+                UpdateAt = DateTime.Now,
                 MovieContents = new List<MovieContent>
                 {
                     new MovieContent
                     {
+                        // TODO: Сделать инициализацию со стороны базы данных
+                        Id = Guid.NewGuid(),
                         Url = movieInfoModel.Url,
-                        Quality = movieInfoModel.Quality
+                        Quality = movieInfoModel.Quality,
+                        CreateAt = DateTime.Now
                     }
                 }
             };
@@ -52,8 +59,10 @@ namespace Movies.Api.Services.Logic
             var movieContents = movieInfo.MovieContents.ToList();
             movieContents.Add(new MovieContent
             {
+                Id = Guid.NewGuid(),
                 Quality = content.Quality,
-                Url = content.Url
+                Url = content.Url,
+                CreateAt = DateTime.Now
             });
             movieInfo.MovieContents = movieContents;
 
@@ -64,8 +73,11 @@ namespace Movies.Api.Services.Logic
         public MovieListModel GetMovies(int page = 1, int pageSize = 20)
         {
             var count = _movieRepository.GetAll().Count();
-            var items = _movieRepository.GetAll().OrderBy(t => t.Id)
-                .Skip((page - 1) * pageSize).Take(pageSize).ToList();
+            var items = _movieRepository.GetAll()
+                .OrderBy(t => t.CreateAt)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
 
             PageViewModel pageViewModel = new PageViewModel(count, page, pageSize);
             MovieListModel viewModel = new MovieListModel
