@@ -97,5 +97,30 @@ namespace Movies.Api.Services.Logic
             };
             return viewModel;
         }
+
+        public MovieListModel GetMovies(string like, int page = 1, int pageSize = 20)
+        {
+            var items = _movieRepository.Get(t => t.Title.ToLower().IndexOf(like.ToLower()) > -1).ToList();
+
+            var count = items.Count;
+
+            PageViewModel pageViewModel = new PageViewModel(count, page, pageSize);
+            MovieListModel viewModel = new MovieListModel
+            {
+                PageViewModel = pageViewModel,
+                Movies = items.Select(t =>
+                {
+                    var bestQuality = t.GetBestMovieSource();
+                    return new AddMovieInfo
+                    {
+                        Quality = bestQuality.Quality,
+                        Title = t.Title,
+                        Url = bestQuality.Url,
+                        UrlPoster = t.UrlPoster
+                    };
+                })
+            };
+            return viewModel;
+        }
     }
 }

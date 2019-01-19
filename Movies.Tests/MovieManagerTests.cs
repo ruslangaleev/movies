@@ -7,6 +7,7 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace Movies.Tests
 {
@@ -126,6 +127,57 @@ namespace Movies.Tests
             var movieListModel = movieManager.GetMovies();
 
             Assert.AreEqual(MovieQuality.Good, movieListModel.Movies.First().Quality);
+        }
+
+        [Test]
+        public void Returns2FoundMovies()
+        {
+            var movies = new List<MovieInfo>
+            {
+                new MovieInfo
+                {
+                    Title = "Гарри Поттер и филосовский камень",
+                    MovieSources = new List<MovieSource>
+                    {
+                        new MovieSource()
+                    }
+                },
+                new MovieInfo
+                {
+                    Title = "Гарри Поттер и Терминатор",
+                    MovieSources = new List<MovieSource>
+                    {
+                        new MovieSource()
+                    }
+                },
+                new MovieInfo
+                {
+                    Title = "Терминатор. Возвращение",
+                    MovieSources = new List<MovieSource>
+                    {
+                        new MovieSource()
+                    }
+                }
+            };
+
+            var movieRepository = new Mock<IMovieRepository>();
+            movieRepository.Setup(t => t.Get(It.IsAny<Expression<Func<MovieInfo, bool>>>())).Returns((Expression<Func<MovieInfo, bool>> where) =>
+            {
+                return movies.AsQueryable().Where(where);
+            });
+
+            var movieManager = new MovieManager(movieRepository.Object);
+            var movieListModel = movieManager.GetMovies("гаррИ потТер");
+
+            Assert.AreEqual(2, movieListModel.Movies.Count());
+            Assert.IsNotNull(movieListModel.Movies.FirstOrDefault(t => t.Title.IndexOf(movies[0].Title) > -1));
+            Assert.IsNotNull(movieListModel.Movies.FirstOrDefault(t => t.Title.IndexOf(movies[1].Title) > -1));
+
+            movieListModel = movieManager.GetMovies("термИнатор");
+
+            Assert.AreEqual(2, movieListModel.Movies.Count());
+            Assert.IsNotNull(movieListModel.Movies.FirstOrDefault(t => t.Title.IndexOf(movies[1].Title) > -1));
+            Assert.IsNotNull(movieListModel.Movies.FirstOrDefault(t => t.Title.IndexOf(movies[2].Title) > -1));
         }
     }
 }

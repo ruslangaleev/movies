@@ -1,10 +1,4 @@
-﻿using Movies.Api.Models;
-using Movies.Api.ResourceModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Movies.Api.ResourceModels;
 
 namespace Movies.Api.Services.Interfaces
 {
@@ -15,5 +9,7 @@ namespace Movies.Api.Services.Interfaces
         void AddMovieSource(AddMovieSource content);
 
         MovieListModel GetMovies(int page = 1, int pageSize = 20);
+
+        MovieListModel GetMovies(string like, int page = 1, int pageSize = 20);
     }
 }

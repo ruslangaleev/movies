@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
+using System.Linq.Expressions;
 
 namespace Movies.Api.Data.Repositories.Logic
 {
@@ -43,7 +43,12 @@ namespace Movies.Api.Data.Repositories.Logic
 
         public void Update(MovieInfo movieInfo)
         {
+            
+        }
 
+        public IEnumerable<MovieInfo> Get(Expression<Func<MovieInfo, bool>> predicate)
+        {
+            throw new NotImplementedException();
         }
     }
 }

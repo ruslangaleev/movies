@@ -1,10 +1,8 @@
 ﻿using Movies.Api.Models;
-using Movies.Api.ResourceModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Linq.Expressions;
 
 namespace Movies.Api.Data.Repositories.Interfaces
 {
@@ -17,6 +15,8 @@ namespace Movies.Api.Data.Repositories.Interfaces
         MovieInfo Get(Guid id);
 
         IQueryable<MovieInfo> Get();
+
+        IEnumerable<MovieInfo> Get(Expression<Func<MovieInfo, bool>> predicate);
 
         void Save();
     }
