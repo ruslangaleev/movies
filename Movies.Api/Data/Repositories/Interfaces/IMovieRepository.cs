@@ -16,7 +16,7 @@ namespace Movies.Api.Data.Repositories.Interfaces
 
         MovieInfo Get(Guid id);
 
-        IQueryable<MovieInfo> GetAll();
+        IQueryable<MovieInfo> Get();
 
         void Save();
     }

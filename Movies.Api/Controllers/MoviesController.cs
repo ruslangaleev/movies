@@ -28,7 +28,7 @@ namespace Movies.Api.Controllers
         [Route("movies/newurl")]
         public object AddMovieContent(AddMovieSource content)
         {
-            _movieManager.AddMovieContent(content);
+            _movieManager.AddMovieSource(content);
 
             return Ok();
         }

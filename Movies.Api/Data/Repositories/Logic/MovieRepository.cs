@@ -31,7 +31,7 @@ namespace Movies.Api.Data.Repositories.Logic
             return _movies.Find(id);
         }
 
-        public IQueryable<MovieInfo> GetAll()
+        public IQueryable<MovieInfo> Get()
         {
             return _movies.AsQueryable();
         }

@@ -1,20 +1,20 @@
 ﻿using Movies.Api.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace Movies.Api.ResourceModels
 {
+    /// <summary>
+    /// Информация о новом источнике фильма.
+    /// </summary>
     public class AddMovieSource
     {
         /// <summary>
-        /// Идентификатор фильма.
+        /// Идентификатор фильма из базы.
         /// </summary>
         public Guid Id { get; set; }
 
         /// <summary>
-        /// Качество.
+        /// Качество фильма.
         /// </summary>
         public MovieQuality Quality { get; set; }
 

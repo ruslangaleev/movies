@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Movies.Api.Models
 {
@@ -16,7 +16,7 @@ namespace Movies.Api.Models
         /// <summary>
         /// Список источников.
         /// </summary>
-        public virtual ICollection<MovieSource> MovieContents { get; set; }
+        public virtual ICollection<MovieSource> MovieSources { get; set; }
 
         /// <summary>
         /// Ссылка на постер к фильму.
@@ -29,7 +29,30 @@ namespace Movies.Api.Models
 
         public MovieInfo()
         {
-            MovieContents = new List<MovieSource>();
+            MovieSources = new List<MovieSource>();
+        }
+
+        public MovieSource GetBestMovieSource()
+        {
+            var great = MovieSources.FirstOrDefault(t => t.Quality == MovieQuality.Great);
+            if (great != null)
+            {
+                return great;
+            }
+
+            var good = MovieSources.FirstOrDefault(t => t.Quality == MovieQuality.Good);
+            if (good != null)
+            {
+                return good;
+            }
+
+            var medium = MovieSources.FirstOrDefault(t => t.Quality == MovieQuality.Medium);
+            if (medium != null)
+            {
+                return medium;
+            }
+
+            return MovieSources.FirstOrDefault(t => t.Quality == MovieQuality.Poor);
         }
     }
 }

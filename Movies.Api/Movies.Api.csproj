@@ -230,11 +230,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\MovieContent.cs" />
+    <Compile Include="Models\MovieSource.cs" />
     <Compile Include="Models\MovieInfo.cs" />
     <Compile Include="Models\MovieQuality.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ResourceModels\AddMovieContent.cs" />
+    <Compile Include="ResourceModels\AddMovieSource.cs" />
     <Compile Include="ResourceModels\AddMovieInfo.cs" />
     <Compile Include="ResourceModels\MovieListModel.cs" />
     <Compile Include="ResourceModels\PageViewModel.cs" />

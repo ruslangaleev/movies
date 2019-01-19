@@ -29,7 +29,7 @@ namespace Movies.Api.Services.Logic
                 UrlPoster = movieInfoModel.UrlPoster,
                 CreateAt = DateTime.Now,
                 UpdateAt = DateTime.Now,
-                MovieContents = new List<MovieSource>
+                MovieSources = new List<MovieSource>
                 {
                     new MovieSource
                     {
@@ -47,16 +47,16 @@ namespace Movies.Api.Services.Logic
             _movieRepository.Save();
         }
 
-        public void AddMovieContent(AddMovieSource content)
+        public void AddMovieSource(AddMovieSource content)
         {
             var movieInfo = _movieRepository.Get(content.Id) ?? throw new ArgumentNullException(nameof(content.Id));
 
-            if (movieInfo.MovieContents.Any(t => t.Url == content.Url))
+            if (movieInfo.MovieSources.Any(t => t.Url == content.Url))
             {
                 throw new ArgumentException(nameof(content.Url));
             }
 
-            var movieContents = movieInfo.MovieContents.ToList();
+            var movieContents = movieInfo.MovieSources.ToList();
             movieContents.Add(new MovieSource
             {
                 Id = Guid.NewGuid(),
@@ -64,7 +64,7 @@ namespace Movies.Api.Services.Logic
                 Url = content.Url,
                 CreateAt = DateTime.Now
             });
-            movieInfo.MovieContents = movieContents;
+            movieInfo.MovieSources = movieContents;
 
             _movieRepository.Update(movieInfo);
             _movieRepository.Save();
@@ -72,8 +72,8 @@ namespace Movies.Api.Services.Logic
 
         public MovieListModel GetMovies(int page = 1, int pageSize = 20)
         {
-            var count = _movieRepository.GetAll().Count();
-            var items = _movieRepository.GetAll()
+            var count = _movieRepository.Get().Count();
+            var items = _movieRepository.Get()
                 .OrderBy(t => t.CreateAt)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
@@ -85,12 +85,12 @@ namespace Movies.Api.Services.Logic
                 PageViewModel = pageViewModel,
                 Movies = items.Select(t =>
                 {
+                    var bestQuality = t.GetBestMovieSource();
                     return new AddMovieInfo
                     {
-                        // TODO: Взять фильм только с лучшим качеством
-                        Quality = t.MovieContents.FirstOrDefault().Quality,
+                        Quality = bestQuality.Quality,
                         Title = t.Title,
-                        Url = t.MovieContents.FirstOrDefault().Url,
+                        Url = bestQuality.Url,
                         UrlPoster = t.UrlPoster
                     };
                 })
