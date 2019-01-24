@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace Movies.Api.Data.Repositories.Logic
 {
@@ -46,9 +47,9 @@ namespace Movies.Api.Data.Repositories.Logic
             
         }
 
-        public IEnumerable<MovieInfo> Get(Expression<Func<MovieInfo, bool>> predicate)
+        public async Task<IEnumerable<MovieInfo>> Get(Expression<Func<MovieInfo, bool>> predicate)
         {
-            return _movies.Where(predicate).ToList();
+            return await _movies.Where(predicate).ToListAsync();
         }
     }
 }

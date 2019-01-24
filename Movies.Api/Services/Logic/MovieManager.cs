@@ -5,6 +5,7 @@ using Movies.Api.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Movies.Api.Services.Logic
 {
@@ -106,11 +107,11 @@ namespace Movies.Api.Services.Logic
             return viewModel;
         }
 
-        public MovieListModel GetMovies(string like, int page = 1, int pageSize = 20)
+        public async Task<MovieListModel> GetMovies(string like, int page = 1, int pageSize = 20)
         {
-            var items = _movieRepository.Get(t => t.Title.ToLower().IndexOf(like.ToLower()) > -1).ToList();
+            var items = await _movieRepository.Get(t => t.Title.ToLower().IndexOf(like.ToLower()) > -1);
 
-            var count = items.Count;
+            var count = items.Count();
 
             PageViewModel pageViewModel = new PageViewModel(count, page, pageSize);
             MovieListModel viewModel = new MovieListModel

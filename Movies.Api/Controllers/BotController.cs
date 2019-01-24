@@ -249,7 +249,7 @@ namespace Movies.Api.Controllers
 
                     //var quality = (MovieQuality)Enum.ToObject(typeof(MovieQuality), Int32.Parse(words[2]));
 
-                    var movieListModel = _movieManager.GetMovies(message.ObjectMessage.Body);
+                    var movieListModel = await _movieManager.GetMovies(message.ObjectMessage.Body);
 
                     string responseMessage = null;
                     if (movieListModel.Movies.Count() > 0)

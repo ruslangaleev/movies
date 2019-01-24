@@ -1,4 +1,5 @@
 ﻿using Movies.Api.ResourceModels;
+using System.Threading.Tasks;
 
 namespace Movies.Api.Services.Interfaces
 {
@@ -10,6 +11,6 @@ namespace Movies.Api.Services.Interfaces
 
         MovieListModel GetMovies(int page = 1, int pageSize = 20);
 
-        MovieListModel GetMovies(string like, int page = 1, int pageSize = 20);
+        Task<MovieListModel> GetMovies(string like, int page = 1, int pageSize = 20);
     }
 }

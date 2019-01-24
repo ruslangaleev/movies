@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace Movies.Api.Data.Repositories.Interfaces
 {
@@ -16,7 +17,7 @@ namespace Movies.Api.Data.Repositories.Interfaces
 
         IQueryable<MovieInfo> Get();
 
-        IEnumerable<MovieInfo> Get(Expression<Func<MovieInfo, bool>> predicate);
+        Task<IEnumerable<MovieInfo>> Get(Expression<Func<MovieInfo, bool>> predicate);
 
         void Save();
     }
