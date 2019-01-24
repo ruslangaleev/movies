@@ -48,7 +48,7 @@ namespace Movies.Api.Data.Repositories.Logic
 
         public IEnumerable<MovieInfo> Get(Expression<Func<MovieInfo, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return _movies.Where(predicate).ToList();
         }
     }
 }

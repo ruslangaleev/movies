@@ -7,13 +7,13 @@ namespace Movies.Api.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.0.2-21211")]
-    public sealed partial class MigrateDB : IMigrationMetadata
+    public sealed partial class MigrateDB_1 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(MigrateDB));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(MigrateDB_1));
         
         string IMigrationMetadata.Id
         {
-            get { return "201901041205146_MigrateDB"; }
+            get { return "201901241813338_MigrateDB_1"; }
         }
         
         string IMigrationMetadata.Source

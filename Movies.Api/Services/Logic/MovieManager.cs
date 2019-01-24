@@ -42,7 +42,14 @@ namespace Movies.Api.Services.Logic
                 }
             };
 
-            _movieRepository.Add(movieInfo);
+            try
+            {
+                _movieRepository.Add(movieInfo);
+            }
+            catch(Exception e)
+            {
+                var s = e;
+            }
 
             _movieRepository.Save();
         }
@@ -86,6 +93,7 @@ namespace Movies.Api.Services.Logic
                 Movies = items.Select(t =>
                 {
                     var bestQuality = t.GetBestMovieSource();
+
                     return new AddMovieInfo
                     {
                         Quality = bestQuality.Quality,

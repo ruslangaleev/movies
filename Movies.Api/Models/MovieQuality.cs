@@ -23,6 +23,11 @@
         /// <summary>
         /// Отличное. Отличный звук и отличное видео
         /// </summary>
-        Great
+        Great,
+
+        /// <summary>
+        /// Неизвестно.
+        /// </summary>
+        Unknown
     }
 }

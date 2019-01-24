@@ -52,7 +52,17 @@ namespace Movies.Api.Models
                 return medium;
             }
 
-            return MovieSources.FirstOrDefault(t => t.Quality == MovieQuality.Poor);
+            var poor = MovieSources.FirstOrDefault(t => t.Quality == MovieQuality.Poor);
+            if (poor != null)
+            {
+                return poor;
+            }
+
+            return new MovieSource
+            {
+                Quality = MovieQuality.Unknown,
+                Url = null
+            };
         }
     }
 }

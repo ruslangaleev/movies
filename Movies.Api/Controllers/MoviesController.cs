@@ -37,7 +37,14 @@ namespace Movies.Api.Controllers
         [Route("movies")]
         public object GetMovies(int page, int pageSize)
         {
-            return _movieManager.GetMovies(page, pageSize);
+            try
+            {
+                return _movieManager.GetMovies(page, pageSize);
+            }
+            catch(Exception e)
+            {
+                return BadRequest($"Message: {e.Message}. StackTrace: {e.StackTrace}");
+            }
         }
     }
 }
