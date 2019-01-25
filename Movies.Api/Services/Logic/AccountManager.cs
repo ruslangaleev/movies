@@ -25,6 +25,11 @@ namespace Movies.Api.Services.Logic
       await _accountRepository.Save();
     }
 
+    public async Task<IEnumerable<Account>> Get(Role role)
+    {
+      return await _accountRepository.Get(role);
+    }
+
     public Task Remove(Guid id)
     {
       throw new NotImplementedException();

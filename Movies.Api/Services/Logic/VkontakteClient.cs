@@ -7,15 +7,15 @@ using Newtonsoft.Json;
 
 namespace Movies.Api.Services.Logic
 {
-  public class VkontakteParser : IVkontakteParser
+  public class VkontakteClient : IVkontakteClient
   {
     private readonly int _groupId;
 
     private readonly HttpClient _httpClient;
 
-    public VkontakteParser(int groupId)
+    public VkontakteClient()
     {
-      _groupId = groupId;
+      _groupId = 58170807;
       _httpClient = new HttpClient();
     }
 
@@ -28,11 +28,6 @@ namespace Movies.Api.Services.Logic
       var infoPost = JsonConvert.DeserializeObject<InfoPost>(json);
 
       return infoPost.response.items;
-    }
-
-    public Task Start()
-    {
-      throw new NotImplementedException();
     }
   }
 }

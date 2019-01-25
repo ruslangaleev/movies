@@ -14,5 +14,7 @@ namespace Movies.Api.Services.Interfaces
     Task Update(Account account);
 
     Task Remove(Guid id);
+
+    Task<IEnumerable<Account>> Get(Role role);
   }
 }

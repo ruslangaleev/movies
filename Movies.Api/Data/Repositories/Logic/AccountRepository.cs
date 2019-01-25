@@ -45,5 +45,10 @@ namespace Movies.Api.Data.Repositories.Logic
     {
       await _dbContext.SaveChangesAsync();
     }
+
+    public async Task<IEnumerable<Account>> Get(Role role)
+    {
+      return await _accounts.Where(t => t.Role == role).ToListAsync();
+    }
   }
 }

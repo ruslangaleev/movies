@@ -216,13 +216,16 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MoviesController.cs" />
     <Compile Include="Data\MovieContext.cs" />
+    <Compile Include="Data\Repositories\Interfaces\IAccountRepository.cs" />
     <Compile Include="Data\Repositories\Interfaces\IMovieRepository.cs" />
+    <Compile Include="Data\Repositories\Logic\AccountRepository.cs" />
     <Compile Include="Data\Repositories\Logic\MovieRepository.cs" />
     <Compile Include="Migrations\201901241813338_MigrateDB_1.cs" />
     <Compile Include="Migrations\201901241813338_MigrateDB_1.Designer.cs">
       <DependentUpon>201901241813338_MigrateDB_1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Account.cs" />
     <Compile Include="Models\UnityResolver.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -238,10 +241,14 @@
     <Compile Include="ResourceModels\MovieListModel.cs" />
     <Compile Include="ResourceModels\PageViewModel.cs" />
     <Compile Include="ResourceModels\ResponseMessage.cs" />
+    <Compile Include="Services\Interfaces\IAccountManager.cs" />
     <Compile Include="Services\Interfaces\IMovieManager.cs" />
-    <Compile Include="Services\Interfaces\IVkontakteParser.cs" />
+    <Compile Include="Services\Interfaces\IParser.cs" />
+    <Compile Include="Services\Interfaces\IVkontakteClient.cs" />
+    <Compile Include="Services\Logic\AccountManager.cs" />
     <Compile Include="Services\Logic\MovieManager.cs" />
-    <Compile Include="Services\Logic\VkontakteParser.cs" />
+    <Compile Include="Services\Logic\Parser.cs" />
+    <Compile Include="Services\Logic\VkontakteClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Movies.mdf" />
