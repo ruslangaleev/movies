@@ -17,8 +17,13 @@ namespace Movies.Api
         {
             var container = new UnityContainer();
             container.RegisterType<DbContext, MovieContext>(new PerThreadLifetimeManager());
+
             container.RegisterType<IMovieRepository, MovieRepository>();
             container.RegisterType<IMovieManager, MovieManager>();
+
+            container.RegisterType<IAccountRepository, AccountRepository>();
+            container.RegisterType<IAccountManager, AccountManager>();
+
             config.DependencyResolver = new UnityResolver(container);
 
             // Маршруты веб-API

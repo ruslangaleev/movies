@@ -15,7 +15,9 @@ namespace Movies.Tests
     public async Task Test()
     {
       var vkontakteParser = new VkontakteParser(58170807);
-      await vkontakteParser.GetInfoLastPost();
+      var result = await vkontakteParser.GetInfoPost(10);
+
+      Assert.AreEqual(10, result.Count());
     }
   }
 }
