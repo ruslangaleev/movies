@@ -1,16 +1,20 @@
-﻿using Moq;
+﻿
+using Moq;
 using Movies.Api.Data.Repositories.Interfaces;
 using Movies.Api.Models;
 using Movies.Api.ResourceModels;
 using Movies.Api.Services.Logic;
 using NUnit.Framework;
+using NUnit.Framework.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace Movies.Tests
 {
+  [TestFixture]
     public class MovieManagerTests
     {
         [Test]
@@ -130,7 +134,7 @@ namespace Movies.Tests
         }
 
         [Test]
-        public void Returns2FoundMovies()
+        public async Task Returns2FoundMovies()
         {
             var movies = new List<MovieInfo>
             {
@@ -161,19 +165,19 @@ namespace Movies.Tests
             };
 
             var movieRepository = new Mock<IMovieRepository>();
-            movieRepository.Setup(t => t.Get(It.IsAny<Expression<Func<MovieInfo, bool>>>())).Returns((Expression<Func<MovieInfo, bool>> where) =>
+            movieRepository.Setup(t => t.Get(It.IsAny<Expression<Func<MovieInfo, bool>>>())).ReturnsAsync((Expression<Func<MovieInfo, bool>> where) =>
             {
                 return movies.AsQueryable().Where(where);
             });
 
             var movieManager = new MovieManager(movieRepository.Object);
-            var movieListModel = movieManager.GetMovies("гаррИ потТер");
+            var movieListModel = await movieManager.GetMovies("гаррИ потТер");
 
             Assert.AreEqual(2, movieListModel.Movies.Count());
             Assert.IsNotNull(movieListModel.Movies.FirstOrDefault(t => t.Title.IndexOf(movies[0].Title) > -1));
             Assert.IsNotNull(movieListModel.Movies.FirstOrDefault(t => t.Title.IndexOf(movies[1].Title) > -1));
 
-            movieListModel = movieManager.GetMovies("термИнатор");
+            movieListModel = await movieManager.GetMovies("термИнатор");
 
             Assert.AreEqual(2, movieListModel.Movies.Count());
             Assert.IsNotNull(movieListModel.Movies.FirstOrDefault(t => t.Title.IndexOf(movies[1].Title) > -1));

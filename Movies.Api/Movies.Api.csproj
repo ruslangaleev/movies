@@ -233,12 +233,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResourceModels\AddMovieSource.cs" />
     <Compile Include="ResourceModels\AddMovieInfo.cs" />
+    <Compile Include="ResourceModels\InfoPost.cs" />
     <Compile Include="ResourceModels\Message.cs" />
     <Compile Include="ResourceModels\MovieListModel.cs" />
     <Compile Include="ResourceModels\PageViewModel.cs" />
     <Compile Include="ResourceModels\ResponseMessage.cs" />
     <Compile Include="Services\Interfaces\IMovieManager.cs" />
+    <Compile Include="Services\Interfaces\IVkontakteParser.cs" />
     <Compile Include="Services\Logic\MovieManager.cs" />
+    <Compile Include="Services\Logic\VkontakteParser.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Movies.mdf" />
