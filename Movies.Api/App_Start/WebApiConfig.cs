@@ -24,7 +24,16 @@ namespace Movies.Api
             container.RegisterType<IAccountRepository, AccountRepository>();
             container.RegisterType<IAccountManager, AccountManager>();
 
+            container.RegisterType<IRawDataRepository, RawDataRepository>();
+
+            container.RegisterType<IVkontakteClient, VkontakteClient>();
+
+            container.RegisterType<IParser, Parser>();
+
             config.DependencyResolver = new UnityResolver(container);
+
+            var parser = container.Resolve<IParser>();
+            parser.Start();
 
             // Маршруты веб-API
             config.MapHttpAttributeRoutes();

@@ -35,7 +35,14 @@ namespace Movies.Api.ResourceModels
 
     public class Photo
     {
+        public int id { get; set; }
+
+        public int owner_id { get; set; }
+
+        [Obsolete]
         public Size[] sizes { get; set; }
+
+        public string access_key { get; set; }
     }
 
     public class Size
@@ -50,5 +57,7 @@ namespace Movies.Api.ResourceModels
         public int owner_id { get; set; }
 
         public string title { get; set; }
+
+        public string access_key { get; set; }
     }
 }

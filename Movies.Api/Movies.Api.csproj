@@ -218,14 +218,25 @@
     <Compile Include="Data\MovieContext.cs" />
     <Compile Include="Data\Repositories\Interfaces\IAccountRepository.cs" />
     <Compile Include="Data\Repositories\Interfaces\IMovieRepository.cs" />
+    <Compile Include="Data\Repositories\Interfaces\IRawDataRepository.cs" />
     <Compile Include="Data\Repositories\Logic\AccountRepository.cs" />
     <Compile Include="Data\Repositories\Logic\MovieRepository.cs" />
+    <Compile Include="Data\Repositories\Logic\RawDataRepository.cs" />
     <Compile Include="Migrations\201901241813338_MigrateDB_1.cs" />
     <Compile Include="Migrations\201901241813338_MigrateDB_1.Designer.cs">
       <DependentUpon>201901241813338_MigrateDB_1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201901261608228_MigrateDB_2.cs" />
+    <Compile Include="Migrations\201901261608228_MigrateDB_2.Designer.cs">
+      <DependentUpon>201901261608228_MigrateDB_2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901261610440_MigrateDB_3.cs" />
+    <Compile Include="Migrations\201901261610440_MigrateDB_3.Designer.cs">
+      <DependentUpon>201901261610440_MigrateDB_3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\RawData.cs" />
     <Compile Include="Models\UnityResolver.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -341,6 +352,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201901241813338_MigrateDB_1.resx">
       <DependentUpon>201901241813338_MigrateDB_1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901261608228_MigrateDB_2.resx">
+      <DependentUpon>201901261608228_MigrateDB_2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901261610440_MigrateDB_3.resx">
+      <DependentUpon>201901261610440_MigrateDB_3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
