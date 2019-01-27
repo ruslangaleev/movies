@@ -50,5 +50,15 @@ namespace Movies.Api.Data.Repositories.Logic
 
             return null;
         }
+
+        public async Task<RawData> Get(Guid id)
+        {
+            return await _rawDatas.FindAsync(id);
+        }
+
+        public async Task<RawData> GetFirstNotPublished()
+        {
+            return await _rawDatas.FirstOrDefaultAsync(t => !t.Published);
+        }
     }
 }

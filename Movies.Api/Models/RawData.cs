@@ -24,5 +24,9 @@ namespace Movies.Api.Models
         public string Text { get; set; }
 
         public string Attachments { get; set; }
+
+        public DateTime CreateAt { get; set; }
+
+        public DateTime UpdateAt { get; set; }
     }
 }

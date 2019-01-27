@@ -234,6 +234,10 @@
     <Compile Include="Migrations\201901261610440_MigrateDB_3.Designer.cs">
       <DependentUpon>201901261610440_MigrateDB_3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201901261816080_MigrateDB_4.cs" />
+    <Compile Include="Migrations\201901261816080_MigrateDB_4.Designer.cs">
+      <DependentUpon>201901261816080_MigrateDB_4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\RawData.cs" />
@@ -262,10 +266,6 @@
     <Compile Include="Services\Logic\VkontakteClient.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\Movies.mdf" />
-    <Content Include="App_Data\Movies_log.ldf">
-      <DependentUpon>Movies.mdf</DependentUpon>
-    </Content>
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -359,6 +359,12 @@
     <EmbeddedResource Include="Migrations\201901261610440_MigrateDB_3.resx">
       <DependentUpon>201901261610440_MigrateDB_3.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901261816080_MigrateDB_4.resx">
+      <DependentUpon>201901261816080_MigrateDB_4.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

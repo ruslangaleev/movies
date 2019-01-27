@@ -34,6 +34,7 @@ namespace Movies.Api
 
             var parser = container.Resolve<IParser>();
             parser.Start();
+            //parser.ParsingAllPosts();
 
             // Маршруты веб-API
             config.MapHttpAttributeRoutes();

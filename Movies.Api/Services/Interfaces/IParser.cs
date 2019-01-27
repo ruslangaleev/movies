@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Movies.Api.Services.Interfaces
 {
-  public interface IParser
-  {
-    Task Start();
-  }
+    public interface IParser
+    {
+        Task Start();
+
+        Task ParsingAllPosts();
+    }
 }

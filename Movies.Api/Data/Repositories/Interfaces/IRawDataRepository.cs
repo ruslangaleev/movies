@@ -15,6 +15,10 @@ namespace Movies.Api.Data.Repositories.Interfaces
 
         Task<RawData> Get(int groupId, int postId);
 
+        Task<RawData> Get(Guid id);
+
+        Task<RawData> GetFirstNotPublished();
+
         Task Save();
     }
 }
