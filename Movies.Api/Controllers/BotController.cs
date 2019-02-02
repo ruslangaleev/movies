@@ -23,6 +23,8 @@ namespace Movies.Api.Controllers
     [RoutePrefix("api")]
     public class BotController : ApiController
     {
+        private static Dictionary<int, List<string>> _cache = new Dictionary<int, List<string>>();
+
         private readonly IMovieManager _movieManager;
 
         private readonly IRawDataRepository _rawDataRepository;
@@ -47,6 +49,20 @@ namespace Movies.Api.Controllers
         [Route("bot")]
         public async Task<object> Post([FromBody]Message message)
         {
+            var list = default(List<string>);
+            var s = _cache.TryGetValue(message.ObjectMessage.UserId, out list);
+            if (!s)
+            {
+                _cache.Add(message.ObjectMessage.UserId, new List<string>());
+            }
+            else
+            if (list.FirstOrDefault(t => t == message.ObjectMessage.Body) != null)
+            {
+                var response = new HttpResponseMessage(HttpStatusCode.OK);
+                response.Content = new StringContent("ok", Encoding.UTF8, "text/plain");
+                return response;
+            }
+
             if (message.Type == "confirmation")
             {
                 var response = new HttpResponseMessage(HttpStatusCode.OK)
@@ -122,6 +138,10 @@ namespace Movies.Api.Controllers
 
                     await _httpClient.GetAsync(request);
 
+                    _cache[message.ObjectMessage.UserId] = new List<string>();
+                    var l = _cache[message.ObjectMessage.UserId];
+                    l.Add(message.ObjectMessage.Body.ToLower());
+
                     var response = new HttpResponseMessage(HttpStatusCode.OK);
                     response.Content = new StringContent("ok", Encoding.UTF8, "text/plain");
                     return response;
@@ -166,6 +186,10 @@ namespace Movies.Api.Controllers
 
                     await _httpClient.GetAsync(request);
 
+                    _cache[message.ObjectMessage.UserId] = new List<string>();
+                    var l = _cache[message.ObjectMessage.UserId];
+                    l.Add(message.ObjectMessage.Body.ToLower());
+
                     var response = new HttpResponseMessage(HttpStatusCode.OK);
                     response.Content = new StringContent("ok", Encoding.UTF8, "text/plain");
                     return response;
@@ -205,6 +229,10 @@ namespace Movies.Api.Controllers
                     var request = $"https://api.vk.com/method/messages.send?user_id={message.ObjectMessage.UserId}&group_id={message.GroupId}&message={responseMessage}&keyboard={json}&v=5.80&access_token={_token}";
 
                     await _httpClient.GetAsync(request);
+
+                    _cache[message.ObjectMessage.UserId] = new List<string>();
+                    var l = _cache[message.ObjectMessage.UserId];
+                    l.Add(message.ObjectMessage.Body.ToLower());
 
                     var response = new HttpResponseMessage(HttpStatusCode.OK);
                     response.Content = new StringContent("ok", Encoding.UTF8, "text/plain");
@@ -246,6 +274,10 @@ namespace Movies.Api.Controllers
                     var request = $"https://api.vk.com/method/messages.send?user_id={message.ObjectMessage.UserId}&group_id={message.GroupId}&message={responseMessage}&attachment={attachments}&keyboard={json}&v=5.80&access_token={_token}";
 
                     await _httpClient.GetAsync(request);
+
+                    _cache[message.ObjectMessage.UserId] = new List<string>();
+                    var l = _cache[message.ObjectMessage.UserId];
+                    l.Add(message.ObjectMessage.Body.ToLower());
 
                     var response = new HttpResponseMessage(HttpStatusCode.OK);
                     response.Content = new StringContent("ok", Encoding.UTF8, "text/plain");
@@ -327,6 +359,10 @@ namespace Movies.Api.Controllers
 
                     await _httpClient.GetAsync(request);
 
+                    _cache[message.ObjectMessage.UserId] = new List<string>();
+                    var l = _cache[message.ObjectMessage.UserId];
+                    l.Add(message.ObjectMessage.Body.ToLower());
+
                     var response = new HttpResponseMessage(HttpStatusCode.OK);
                     response.Content = new StringContent("ok", Encoding.UTF8, "text/plain");
                     return response;
@@ -334,50 +370,22 @@ namespace Movies.Api.Controllers
 
                 if (operation == Operation.FindMovie)
                 {
-                    //String[] words = message.ObjectMessage.Body.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
-
-                    //var quality = (MovieQuality)Enum.ToObject(typeof(MovieQuality), Int32.Parse(words[2]));
-
                     var movieListModel = await _movieManager.GetMovies(message.ObjectMessage.Body);
+                    
 
-                    string responseMessage = null;
-                    if (movieListModel.Movies.Count() > 0)
+
+                    foreach(var movie in movieListModel.Movies)
                     {
-                        var movie = movieListModel.Movies.First();
-                        responseMessage = $"{movie.Title}\n" +
-                            $"{movie.Quality}\n" +
-                            $"{movie.UrlPoster}\n" +
-                            $"{movie.Url}";
+                        var responseMessage = $"{movie.Title}\n";
+                            //$"Качество: {movie.Quality}\n" +
+                            //$"{movie.UrlPoster}";
+                        var request = $"https://api.vk.com/method/messages.send?user_id={message.ObjectMessage.UserId}&group_id={message.GroupId}&message={responseMessage}&attachment={movie.Url}&v=5.80&access_token={_token}";
+                        await _httpClient.GetAsync(request);
                     }
 
-                    //var buttons = new List<Button>
-                    //{
-                    //    new Button
-                    //    {
-                    //        color = "default",
-                    //        action = new ResourceModels.Action
-                    //        {
-                    //            label = "Добавить фильм",
-                    //            type = "text",
-                    //            payload = JsonConvert.SerializeObject(new
-                    //            {
-                    //                button = "1"
-                    //            })
-                    //        }
-                    //    }
-                    //}.ToArray();
-
-                    //var keyboard = new ResponseMessage
-                    //{
-                    //    OneTime = false,
-                    //    buttons = new[] { buttons }
-                    //};
-
-                    //var json = JsonConvert.SerializeObject(keyboard);
-
-                    var request = $"https://api.vk.com/method/messages.send?user_id={message.ObjectMessage.UserId}&group_id={message.GroupId}&message={responseMessage}&v=5.80&access_token={_token}";
-
-                    await _httpClient.GetAsync(request);
+                    _cache[message.ObjectMessage.UserId] = new List<string>();
+                    var l = _cache[message.ObjectMessage.UserId];
+                    l.Add(message.ObjectMessage.Body.ToLower());
 
                     var response = new HttpResponseMessage(HttpStatusCode.OK);
                     response.Content = new StringContent("ok", Encoding.UTF8, "text/plain");

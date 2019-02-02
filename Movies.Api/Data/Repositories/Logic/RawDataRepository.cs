@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -59,6 +60,11 @@ namespace Movies.Api.Data.Repositories.Logic
         public async Task<RawData> GetFirstNotPublished()
         {
             return await _rawDatas.FirstOrDefaultAsync(t => !t.Published);
+        }
+
+        public async Task<IEnumerable<RawData>> Get(Expression<Func<RawData, bool>> predicate)
+        {
+            return await _rawDatas.Where(predicate).ToListAsync();
         }
     }
 }

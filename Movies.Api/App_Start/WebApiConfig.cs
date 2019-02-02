@@ -1,10 +1,12 @@
-﻿using Movies.Api.Data;
+﻿using Hangfire;
+using Movies.Api.Data;
 using Movies.Api.Data.Repositories.Interfaces;
 using Movies.Api.Data.Repositories.Logic;
 using Movies.Api.Models;
 using Movies.Api.Services.Interfaces;
 using Movies.Api.Services.Logic;
 using System.Data.Entity;
+using System.Threading;
 using System.Web.Http;
 using Unity;
 using Unity.Lifetime;
@@ -26,18 +28,20 @@ namespace Movies.Api
 
             container.RegisterType<IRawDataRepository, RawDataRepository>();
 
+            container.RegisterType<IParser, Services.Logic.Parser>();
+
             container.RegisterType<IVkontakteClient, VkontakteClient>();
 
-            container.RegisterType<IParser, Parser>();
 
+            Hangfire.GlobalConfiguration.Configuration.UseActivator(new UnityJobActivator(container));
             config.DependencyResolver = new UnityResolver(container);
 
-            var parser = container.Resolve<IParser>();
-            parser.Start();
-            //parser.ParsingAllPosts();
+
 
             // Маршруты веб-API
             config.MapHttpAttributeRoutes();
+
+            
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",

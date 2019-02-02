@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,6 +19,8 @@ namespace Movies.Api.Data.Repositories.Interfaces
         Task<RawData> Get(Guid id);
 
         Task<RawData> GetFirstNotPublished();
+
+        Task<IEnumerable<RawData>> Get(Expression<Func<RawData, bool>> predicate);
 
         Task Save();
     }

@@ -27,8 +27,8 @@ namespace Movies.Tests
           Role = Role.Admin
         }
       });
-      var parser = new Parser(vkontakteClient, accountManager.Object);
-      await parser.Start();
+      //var parser = new Parser(vkontakteClient, accountManager.Object);
+      //await parser.Start();
     }
   }
 }

@@ -13,9 +13,12 @@ namespace Movies.Api.Services.Logic
     {
         private readonly IMovieRepository _movieRepository;
 
-        public MovieManager(IMovieRepository movieRepository)
+        private readonly IRawDataRepository _rawDataRepository;
+
+        public MovieManager(IMovieRepository movieRepository, IRawDataRepository rawDataRepository)
         {
             _movieRepository = movieRepository ?? throw new ArgumentNullException(nameof(movieRepository));
+            _rawDataRepository = rawDataRepository ?? throw new ArgumentNullException(nameof(rawDataRepository));
         }
 
         public void AddMovieInfo(AddMovieInfo movieInfoModel)
@@ -109,7 +112,8 @@ namespace Movies.Api.Services.Logic
 
         public async Task<MovieListModel> GetMovies(string like, int page = 1, int pageSize = 20)
         {
-            var items = await _movieRepository.Get(t => t.Title.ToLower().IndexOf(like.ToLower()) > -1);
+            //var items = await _movieRepository.Get(t => t.Title.ToLower().IndexOf(like.ToLower()) > -1);
+            var items = await _rawDataRepository.Get(t => t.Text.ToLower().IndexOf(like.ToLower()) > -1);
 
             var count = items.Count();
 
@@ -119,13 +123,13 @@ namespace Movies.Api.Services.Logic
                 PageViewModel = pageViewModel,
                 Movies = items.Select(t =>
                 {
-                    var bestQuality = t.GetBestMovieSource();
+                    //var bestQuality = t.GetBestMovieSource();
                     return new AddMovieInfo
                     {
-                        Quality = bestQuality.Quality,
-                        Title = t.Title,
-                        Url = bestQuality.Url,
-                        UrlPoster = t.UrlPoster
+                        //Quality = bestQuality.Quality,
+                        Title = t.Text, //t.Title,
+                        Url = t.Attachments //bestQuality.Url,
+                        //UrlPoster = t.UrlPoster
                     };
                 })
             };

@@ -1,15 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace Movies.Api.Services.Interfaces
 {
     public interface IParser
     {
-        Task Start();
+        /// <summary>
+        /// Запускает парсер только на новые посты.
+        /// </summary>
+        /// <returns></returns>
+        Task StartParserNewPosts();
 
-        Task ParsingAllPosts();
+        /// <summary>
+        /// Запускает парсер на все посты.
+        /// </summary>
+        /// <returns></returns>
+        Task StartParserAllPosts();
     }
 }
