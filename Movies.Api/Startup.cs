@@ -24,6 +24,7 @@ namespace Movies.Api
             app.UseHangfireServer();
 
             RecurringJob.AddOrUpdate<IParser>(t => t.StartParserNewPosts(), Cron.MinuteInterval(10));
+            RecurringJob.AddOrUpdate<IParser>(t => t.StartParserAllPosts(), Cron.MinuteInterval(1));
         }
     }
 }

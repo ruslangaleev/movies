@@ -1,5 +1,4 @@
-﻿using System;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Threading.Tasks;
 using Movies.Api.ResourceModels;
 using Movies.Api.Services.Interfaces;
@@ -12,6 +11,8 @@ namespace Movies.Api.Services.Logic
         private readonly int _groupId;
 
         private readonly HttpClient _httpClient;
+
+        private readonly string _token = "b8812d17edb240e4f07adb19ce627fb04111caf26de61e8ced668a6e6e173b107d6b7567d974b9b5a8962";
 
         public VkontakteClient()
         {
@@ -39,6 +40,28 @@ namespace Movies.Api.Services.Logic
             var infoPost = JsonConvert.DeserializeObject<InfoPost>(json);
 
             return infoPost.response.items;
+        }
+
+        public async Task SendMessageWithKeyboard(int userId, int groupId, string message, string keyboard)
+        {
+            var request = $"https://api.vk.com/method/messages.send?user_id={userId}&group_id={groupId}&message={message}&keyboard={keyboard}&v=5.80&access_token={_token}";
+
+            var result = await _httpClient.GetAsync(request);
+            var content = await result.Content.ReadAsStringAsync();
+        }
+
+        public async Task SendMessageWithAttachment(int userId, int groupId, string message, string attachment)
+        {
+            var request = $"https://api.vk.com/method/messages.send?user_id={userId}&group_id={groupId}&message={message}&attachment={attachment}&v=5.80&access_token={_token}";
+
+            await _httpClient.GetAsync(request);
+        }
+
+        public async Task SendMessage(int userId, int groupId, string message)
+        {
+            var request = $"https://api.vk.com/method/messages.send?user_id={userId}&group_id={groupId}&message={message}&v=5.80&access_token={_token}";
+
+            await _httpClient.GetAsync(request);
         }
     }
 }

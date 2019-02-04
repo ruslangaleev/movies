@@ -229,34 +229,21 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\BotController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\DispatcherController.cs" />
-    <Compile Include="Controllers\MoviesController.cs" />
     <Compile Include="Data\MovieContext.cs" />
-    <Compile Include="Data\Repositories\Interfaces\IAccountRepository.cs" />
-    <Compile Include="Data\Repositories\Interfaces\IMovieRepository.cs" />
-    <Compile Include="Data\Repositories\Interfaces\IRawDataRepository.cs" />
-    <Compile Include="Data\Repositories\Logic\AccountRepository.cs" />
-    <Compile Include="Data\Repositories\Logic\MovieRepository.cs" />
-    <Compile Include="Data\Repositories\Logic\RawDataRepository.cs" />
-    <Compile Include="Migrations\201901241813338_MigrateDB_1.cs" />
-    <Compile Include="Migrations\201901241813338_MigrateDB_1.Designer.cs">
-      <DependentUpon>201901241813338_MigrateDB_1.cs</DependentUpon>
+    <Compile Include="Data\Repositories\Interfaces\IMovieFromPostRepository.cs" />
+    <Compile Include="Data\Repositories\Logic\MovieFromPostRepository.cs" />
+    <Compile Include="Migrations\201902041737468_MigrateDB1.cs" />
+    <Compile Include="Migrations\201902041737468_MigrateDB1.Designer.cs">
+      <DependentUpon>201902041737468_MigrateDB1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201901261608228_MigrateDB_2.cs" />
-    <Compile Include="Migrations\201901261608228_MigrateDB_2.Designer.cs">
-      <DependentUpon>201901261608228_MigrateDB_2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901261610440_MigrateDB_3.cs" />
-    <Compile Include="Migrations\201901261610440_MigrateDB_3.Designer.cs">
-      <DependentUpon>201901261610440_MigrateDB_3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901261816080_MigrateDB_4.cs" />
-    <Compile Include="Migrations\201901261816080_MigrateDB_4.Designer.cs">
-      <DependentUpon>201901261816080_MigrateDB_4.cs</DependentUpon>
+    <Compile Include="Migrations\201902041800027_MigrateDB2.cs" />
+    <Compile Include="Migrations\201902041800027_MigrateDB2.Designer.cs">
+      <DependentUpon>201902041800027_MigrateDB2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\AppSettings.cs" />
+    <Compile Include="Models\MovieFromPost.cs" />
     <Compile Include="Models\RawData.cs" />
     <Compile Include="Models\UnityJobActivator.cs" />
     <Compile Include="Models\UnityResolver.cs" />
@@ -274,13 +261,10 @@
     <Compile Include="ResourceModels\MovieListModel.cs" />
     <Compile Include="ResourceModels\PageViewModel.cs" />
     <Compile Include="ResourceModels\ResponseMessage.cs" />
-    <Compile Include="Services\Interfaces\IAccountManager.cs" />
-    <Compile Include="Services\Interfaces\IMovieManager.cs" />
+    <Compile Include="Services\Interfaces\IMovieFromPostManager.cs" />
     <Compile Include="Services\Interfaces\IParser.cs" />
     <Compile Include="Services\Interfaces\IVkontakteClient.cs" />
-    <Compile Include="Services\Logic\AccountManager.cs" />
-    <Compile Include="Services\Logic\AppSettingsClient.cs" />
-    <Compile Include="Services\Logic\MovieManager.cs" />
+    <Compile Include="Services\Logic\MovieFromPostManager.cs" />
     <Compile Include="Services\Logic\Parser.cs" />
     <Compile Include="Services\Logic\VkontakteClient.cs" />
     <Compile Include="Startup.cs" />
@@ -375,21 +359,15 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201901241813338_MigrateDB_1.resx">
-      <DependentUpon>201901241813338_MigrateDB_1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901261608228_MigrateDB_2.resx">
-      <DependentUpon>201901261608228_MigrateDB_2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901261610440_MigrateDB_3.resx">
-      <DependentUpon>201901261610440_MigrateDB_3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901261816080_MigrateDB_4.resx">
-      <DependentUpon>201901261816080_MigrateDB_4.cs</DependentUpon>
-    </EmbeddedResource>
+    <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <EmbeddedResource Include="Migrations\201902041737468_MigrateDB1.resx">
+      <DependentUpon>201902041737468_MigrateDB1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902041800027_MigrateDB2.resx">
+      <DependentUpon>201902041800027_MigrateDB2.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

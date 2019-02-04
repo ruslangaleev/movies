@@ -6,7 +6,6 @@ using Movies.Api.Models;
 using Movies.Api.Services.Interfaces;
 using Movies.Api.Services.Logic;
 using System.Data.Entity;
-using System.Threading;
 using System.Web.Http;
 using Unity;
 using Unity.Lifetime;
@@ -20,29 +19,19 @@ namespace Movies.Api
             var container = new UnityContainer();
             container.RegisterType<DbContext, MovieContext>(new PerThreadLifetimeManager());
 
-            container.RegisterType<IMovieRepository, MovieRepository>();
-            container.RegisterType<IMovieManager, MovieManager>();
-
-            container.RegisterType<IAccountRepository, AccountRepository>();
-            container.RegisterType<IAccountManager, AccountManager>();
-
-            container.RegisterType<IRawDataRepository, RawDataRepository>();
+            container.RegisterType<IMovieFromPostRepository, MovieFromPostRepository>();
+            container.RegisterType<IMovieFromPostManager, MovieFromPostManager>();
 
             container.RegisterType<IParser, Services.Logic.Parser>();
 
             container.RegisterType<IVkontakteClient, VkontakteClient>();
-
-
+            
             Hangfire.GlobalConfiguration.Configuration.UseActivator(new UnityJobActivator(container));
             config.DependencyResolver = new UnityResolver(container);
-
-
-
+            
             // Маршруты веб-API
             config.MapHttpAttributeRoutes();
-
             
-
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
