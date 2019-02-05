@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Configuration;
 using Movies.Api.Services.Interfaces;
 
 namespace Movies.Api.Services.Logic
@@ -15,14 +16,15 @@ namespace Movies.Api.Services.Logic
 
         private readonly IMovieFromPostManager _movieFromPostManager;
 
+        private readonly IConfiguration _configuration;
+
         private readonly int _groupId = 58170807;
 
-        private static int _offset = 1;
-
-        public Parser(IVkontakteClient vkontakteClient, IMovieFromPostManager movieFromPostManager)
+        public Parser(IVkontakteClient vkontakteClient, IMovieFromPostManager movieFromPostManager, IConfiguration configuration)
         {
             _vkontakteClient = vkontakteClient ?? throw new ArgumentNullException(nameof(vkontakteClient));
             _movieFromPostManager = movieFromPostManager ?? throw new ArgumentNullException(nameof(movieFromPostManager));
+            _configuration = configuration;
         }
         
         public async Task StartParserNewPosts()
@@ -71,8 +73,9 @@ namespace Movies.Api.Services.Logic
 
         public async Task StartParserAllPosts()
         {
-            //int offset = 1;
-            var result = await _vkontakteClient.GetInfoPost(100, _offset);
+            var offset = _configuration.Read<int>("ParserOffset");
+
+            var result = await _vkontakteClient.GetInfoPost(100, offset);
 
             foreach (var entry in result)
             {
@@ -118,7 +121,8 @@ namespace Movies.Api.Services.Logic
                 });
             }
 
-             _offset += 1;
+             offset += 1;
+      _configuration.Write("ParserOffset", offset.ToString());
         }
     }
 }

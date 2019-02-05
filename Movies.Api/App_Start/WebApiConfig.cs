@@ -25,7 +25,9 @@ namespace Movies.Api
             container.RegisterType<IParser, Services.Logic.Parser>();
 
             container.RegisterType<IVkontakteClient, VkontakteClient>();
-            
+
+            container.RegisterType<IConfiguration, Configuration>();
+
             Hangfire.GlobalConfiguration.Configuration.UseActivator(new UnityJobActivator(container));
             config.DependencyResolver = new UnityResolver(container);
             
