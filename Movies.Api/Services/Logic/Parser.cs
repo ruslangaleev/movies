@@ -122,7 +122,7 @@ namespace Movies.Api.Services.Logic
             }
 
              offset += 1;
-      _configuration.Write("ParserOffset", offset.ToString());
+            _configuration.Write("ParserOffset", offset.ToString());
         }
     }
 }

@@ -9,32 +9,37 @@ using System.Threading.Tasks;
 
 namespace Movies.Api.Data.Repositories.Logic
 {
-    public class MovieFromPostRepository : IMovieFromPostRepository
+  public class MovieFromPostRepository : IMovieFromPostRepository
+  {
+    private DbContext _dbContext;
+
+    private readonly DbSet<MovieFromPost> _moviesFromPosts;
+
+    public MovieFromPostRepository(DbContext dbContext)
     {
-        private DbContext _dbContext;
+      _moviesFromPosts = dbContext.Set<MovieFromPost>();
 
-        private readonly DbSet<MovieFromPost> _moviesFromPosts;
-
-        public MovieFromPostRepository(DbContext dbContext)
-        {
-            _moviesFromPosts = dbContext.Set<MovieFromPost>();
-
-            _dbContext = dbContext;
-        }
-
-        public void Add(MovieFromPost movieFromPost)
-        {
-            _moviesFromPosts.Add(movieFromPost);
-        }
-
-        public IEnumerable<MovieFromPost> Get(Expression<Func<MovieFromPost, bool>> predicate)
-        {
-            return _moviesFromPosts.Where(predicate);
-        }
-
-        public async Task SaveAsync()
-        {
-            await _dbContext.SaveChangesAsync();
-        }
+      _dbContext = dbContext;
     }
+
+    public void Add(MovieFromPost movieFromPost)
+    {
+      _moviesFromPosts.Add(movieFromPost);
+    }
+
+    public IEnumerable<MovieFromPost> Get(Expression<Func<MovieFromPost, bool>> predicate)
+    {
+      return _moviesFromPosts.Where(predicate);
+    }
+
+    public async Task SaveAsync()
+    {
+      await _dbContext.SaveChangesAsync();
+    }
+
+    public IEnumerable<MovieFromPost> GetAll()
+    {
+      return _moviesFromPosts;
+    }
+  }
 }

@@ -4,12 +4,14 @@ using System.Threading.Tasks;
 
 namespace Movies.Api.Services.Interfaces
 {
-    public interface IMovieFromPostManager
-    {
-        Task Add(MovieFromPost movieFromPost);
+  public interface IMovieFromPostManager
+  {
+    Task Add(MovieFromPost movieFromPost);
 
-        MovieListModel Get(string like, int page = 1, int pageSize = 20);
+    MovieListModel Get(string like, int page = 1, int pageSize = 20);
 
-        MovieFromPost Get(int groupId, int postId);
-    }
+    MovieFromPost Get(int groupId, int postId);
+
+    MovieFromPost GetRandom();
+  }
 }
