@@ -7,7 +7,11 @@ namespace Movies.Api.Services.Interfaces
     {
         Task<Item[]> GetInfoPost(int count);
 
+        Task<Item[]> GetInfoPostByGroupId(int groupId, int count);
+
         Task<Item[]> GetInfoPost(int count, int offset);
+
+        Task<Item[]> GetInfoPostByGroupId(int groupId, int count, int offset);
 
         Task SendMessageWithKeyboard(int userId, int groupId, string message, string keyboard);
 

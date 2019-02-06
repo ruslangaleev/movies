@@ -63,5 +63,27 @@ namespace Movies.Api.Services.Logic
 
             await _httpClient.GetAsync(request);
         }
+
+        public async Task<Item[]> GetInfoPostByGroupId(int groupId, int count)
+        {
+            var token = "f468edbd99bfeabef9c35c6911d9aecf2c957e059d0f5705ef256af379b4832955e137fa83a439e7df34b";
+            var request = $"https://api.vk.com/method/wall.get?owner_id=-{groupId}&count={count}&v=5.92&access_token={token}";
+            var response = await _httpClient.GetAsync(request);
+            var json = await response.Content.ReadAsStringAsync();
+            var infoPost = JsonConvert.DeserializeObject<InfoPost>(json);
+
+            return infoPost.response.items;
+        }
+
+        public async Task<Item[]> GetInfoPostByGroupId(int groupId, int count, int offset)
+        {
+            var token = "f468edbd99bfeabef9c35c6911d9aecf2c957e059d0f5705ef256af379b4832955e137fa83a439e7df34b";
+            var request = $"https://api.vk.com/method/wall.get?owner_id=-{groupId}&count={count}&offset={offset}&v=5.92&access_token={token}";
+            var response = await _httpClient.GetAsync(request);
+            var json = await response.Content.ReadAsStringAsync();
+            var infoPost = JsonConvert.DeserializeObject<InfoPost>(json);
+
+            return infoPost.response.items;
+        }
     }
 }
